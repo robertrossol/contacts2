@@ -15,7 +15,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    contact = Contact.new(name: params[:name], phone: params[:phone], email: params[:email], birthday: params[:birthday])
+    contact = Contact.new(name: params[:name], middle_name: params[:middle_name], phone: params[:phone], email: params[:email], birthday: params[:birthday], user_id: current_user.id)
     contact.save
     contact_id=params[:id]
     flash[:success] = "Contact Successfully Created"
@@ -30,5 +30,25 @@ class ContactsController < ApplicationController
     flash[:danger] = "Contact Deleted"
     redirect_to "/contacts"
     #render "destroy.html.erb"
+  end
+
+  def edit
+    contact_id=params[:id]
+    @contact=Contact.find_by(id: contact_id)
+    render "edit.html.erb"
+  end
+
+  def update
+    contact_id=params[:id]
+    @contact=Contact.find_by(id: contact_id)
+    @contact.name = params[:name]
+    @contact.middle_name = params[:middle_name]
+    @contact.phone = params[:phone]
+    @contact.email = params[:email]
+    @contact.birthday = params[:birthday]
+    @contact.save
+    flash[:success] = "Contact Updated"
+    redirect_to "/contacts"
+    #render "update.html.erb"
   end
 end

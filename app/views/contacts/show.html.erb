@@ -1,6 +1,10 @@
-<h1><%=@contact.name%></a></h2>
+<!-- <h1><%=@contact.name%></h2> -->
+<h1><%=@contact.full_name%></h2>
+<!-- <h1><%=@contact.middle_name%></h2> -->
 <h3><%=@contact.phone%></h3>
 <h3><%=@contact.email%></h3>
 <h3><%=@contact.birthday%></h3>
+<h3>Created <%=@contact.friendly_created_at%></h3>
 <a href="/contacts">Home Directory</a>
 <div><%= link_to "Delete Contact", "/contacts/#{@contact.id}", method: :delete %> </div>
+<div><a href="/contacts/<%=@contact.id%>/edit">Edit Contact</a></div>
